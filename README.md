@@ -1,21 +1,47 @@
 # mall-swarm
 
-<p>
-  <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
-  <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E4%BA%A4%E6%B5%81-%E5%BE%AE%E4%BF%A1%E7%BE%A4-2BA245.svg" alt="交流"></a>
-  <a href="https://github.com/macrozheng/mall-learning"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B-mall--learning-green.svg" alt="学习教程"></a>
-  <a href="https://github.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
-  <a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
-  <a href="https://gitee.com/macrozheng/mall-swarm"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E7%A0%81%E4%BA%91-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80-orange.svg" alt="码云"></a>
-</p>
 
-## 友情提示
+## [环境搭建(https://www.macrozheng.com/mall/deploy/mall_swarm_deploy_windows.html#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA)
 
-> 1. **快速体验项目**：[在线访问地址](https://www.macrozheng.com/admin/index.html) 。
-> 2. **全套学习教程**：[《mall学习教程》](https://www.macrozheng.com) 。
-> 3. **Spring Cloud全套教程**：[《SpringCloud学习教程》](https://github.com/macrozheng/springcloud-learning) 。
-> 4. **专属学习路线**：学习不走弯路，整理了套非常不错的[《mall专属学习路线》](#公众号) 。
-> 5. **项目交流**：想要加群交流项目的朋友，可以加入[mall项目交流群](#公众号) 。
+### nacos
+
+windows
+
+```
+startup.cmd -m standalone
+```
+
+### 部署
+
+ - windows: 搭建docker本地服务, 进入docker文件夹执行对应docker-compose即可, 安装 [nacos](https://github.com/alibaba/nacos/releases) 并 `startup.cmd -m standalone` 启动
+ - [linux docker-compose 部署](https://www.macrozheng.com/mall/deploy/mall_deploy_docker_compose.html)
+ - [linux docker 容器部署](https://www.macrozheng.com/mall/deploy/mall_swarm_deploy_docker.html)
+ - [mall-swarm微服务K8S](https://www.macrozheng.com/mall/deploy/mall_swarm_deploy_k8s.html)
+
+## 启动
+
+mall-swarm项目启动有先后顺序，大家可以按照以下顺序启动。
+```
+启动网关服务mall-gateway，直接运行MallGatewayApplication的main函数即可；
+
+启动认证中心mall-auth，直接运行MallAuthApplication的main函数即可；
+
+启动后台管理服务mall-admin，直接运行MallAdminApplication的main函数即可；
+
+启动前台服务mall-portal，直接运行MallPortalApplication的main函数即可；
+
+启动搜索服务mall-search，直接运行MallSearchApplication的main函数即可；
+
+启动监控中心mall-monitor，直接运行MallMonitorApplication的main函数即可；
+
+运行完成后可以通过监控中心查看监控信息，账号密码为macro:123456：http://localhost:8101
+
+运行完成后可以直接通过如下地址访问API文档：http://localhost:8201/doc.html
+```
+
+用户：admin
+密码：macro123
+
 
 ## 项目介绍
 
@@ -40,18 +66,6 @@ mall
 ├── mall-demo -- 微服务远程调用测试服务
 └── config -- 配置中心存储的配置
 ```
-
-## 项目文档
-
-- 项目文档`mall`系列教程：[https://www.macrozheng.com](https://www.macrozheng.com)
-- 配套`Spring Cloud`系列教程：[https://github.com/macrozheng/springcloud-learning](https://github.com/macrozheng/springcloud-learning)
-
-## 项目演示
-
-- 后台管理系统： [https://www.macrozheng.com/admin/index.html](https://www.macrozheng.com/admin/index.html)
-- 移动端商城系统：[https://www.macrozheng.com/app/mainpage.html](https://www.macrozheng.com/app/mainpage.html)
-
-## 技术选型
 
 ### 后端技术
 
@@ -160,13 +174,6 @@ mall
 
 ![](http://img.macrozheng.com/mall/project/mall_swarm_run_new_08.png)
 
-## 公众号
-
-学习不走弯路，关注公众号「**macrozheng**」，回复「**学习路线**」，获取mall项目专属学习路线！
-
-加微信群交流，公众号后台回复「**加群**」即可。
-
-![公众号图片](http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg)
 
 ## 许可证
 

@@ -1,0 +1,95 @@
+version: "3.7"
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    user: root
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    hostname: grafana
+    user: root
+    privileged: true
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+      - GF_USERS_ALLOW_SIGN_UP=false  
+      - TZ=Asia/Shanghai
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+
+  cadvisor:
+    image: google/cadvisor
+    volumes:
+      - '/:/rootfs:ro'
+      - '/var/run:/var/run:rw'
+      - '/sys:/sys:ro'
+      - '/var/lib/docker/:/var/lib/docker:ro'
+    ports:
+      - '8090:8080'
+
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+
+  mysqld-exporter:
+    container_name: mysqld-exporter
+    image: prom/mysqld-exporter
+    environment:
+      DATA_SOURCE_NAME: "root:mysqlroot@(172.17.0.1:3306)/"
+    ports:
+      - "9104:9104"
+
+  mogno-exporter:
+    container_name: "mogno-exporter"
+    image: percona/mongodb_exporter:0.35.0
+    environment:
+      - TZ=Asia/Shanghai
+      - MONGODB_URI=mongodb://mongo27018:mongo27018@172.17.0.1:27018
+    ports:
+      - 9216:9216
+    command:
+      - '--no-mongodb.direct-connect'
+      - '--collect-all'
+
+  # [AlertManager的使用（邮件和微信告警）] [https://blog.csdn.net/weixin_45880055/article/details/120585024)
+  # [docker部署cAdvisor + Prometheus + Grafana + Alertmanager](https://blog.csdn.net/qq_25235871/article/details/109162352)
+  # alertmanager:
+  #   container_name: "alertmanager"
+  #   image: prom/alertmanager
+  #   command:
+  #     - '--config.file=/etc/alertmanager/config.yml'
+  #   ports:
+  #     - 9093:9093
+

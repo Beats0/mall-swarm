@@ -1,0 +1,15 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    environment:
+    - TZ=Asia/Shanghai
+    # - RABBITMQ_DEFAULT_USER=rabbitmq
+    # - RABBITMQ_DEFAULT_PASS=pass
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
+      - ./rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+    ports:
+      - 5672:5672
+      - 15672:15672

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:1.22
+    container_name: nginx
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      # - ./ssl:/etc/nginx/ssl
+      # - ./conf:/etc/nginx/conf.d
+      - ./log:/var/log/nginx
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./sharedata:/sharedata
+      - ./html:/usr/share/nginx/html
+    

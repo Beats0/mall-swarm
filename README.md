@@ -1,16 +1,6 @@
 # mall-swarm
 
 
-## [环境搭建(https://www.macrozheng.com/mall/deploy/mall_swarm_deploy_windows.html#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA)
-
-### nacos
-
-windows
-
-```
-startup.cmd -m standalone
-```
-
 ### 部署
 
  - windows: 搭建docker本地服务, 进入docker文件夹执行对应docker-compose即可, 安装 [nacos](https://github.com/alibaba/nacos/releases) 并 `startup.cmd -m standalone` 启动

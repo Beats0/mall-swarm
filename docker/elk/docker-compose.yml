@@ -9,6 +9,7 @@ services:
       - "discovery.type=single-node" #以单一节点模式启动
       - "ES_JAVA_OPTS=-Xms512m -Xmx1024m" #设置使用jvm内存大小
     volumes:
+      - ./elasticsearch/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins #插件文件挂载
       - ./elasticsearch/data:/usr/share/elasticsearch/data #数据文件挂载
     ports:
@@ -41,3 +42,9 @@ services:
       - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
     ports:
       - 5601:5601
+  es-head:
+    # elasticsearch-head 跨域问题  https://github.com/mobz/elasticsearch-head/issues/381
+    image: mobz/elasticsearch-head:5-alpine
+    container_name: es-head
+    ports:
+      - 9100:9100

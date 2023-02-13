@@ -1,12 +1,62 @@
 # mall-swarm
 
-
 ### 部署
 
  - windows: 搭建docker本地服务, 进入docker文件夹执行对应docker-compose即可, 安装 [nacos](https://github.com/alibaba/nacos/releases) 并 `startup.cmd -m standalone` 启动
  - [linux docker-compose 部署](https://www.macrozheng.com/mall/deploy/mall_deploy_docker_compose.html)
  - [linux docker 容器部署](https://www.macrozheng.com/mall/deploy/mall_swarm_deploy_docker.html)
  - [mall-swarm微服务K8S](https://www.macrozheng.com/mall/deploy/mall_swarm_deploy_k8s.html)
+
+### logstash 安装 logstash-codec-json_lines
+
+```shell
+# 以root身份进入logstash容器
+docker exec -it --user root 1837cf8cd4b9 /bin/bash
+
+apt-get update
+apt-get install vim -y
+vim /usr/share/logstash/Gemfile
+```
+
+更改默认的 https://rubygems.org 为https://mirrors.tuna.tsinghua.edu.cn/rubygems
+
+```diff
+- source "https://rubygems.org"
++ source "https://mirrors.tuna.tsinghua.edu.cn/rubygems"
+```
+
+安装 logstash-codec-json_lines
+
+```shell
+/usr/share/logstash/bin/logstash-plugin install --no-verify logstash-codec-json_lines
+```
+
+然后重启container即可
+
+
+### es-head 406 错误
+
+进入 es-head 容器
+
+```shell
+docker exec -it bce0a7da59f7 sh
+cd _site/
+```
+
+编辑vendor.js  共有两处
+
+6886行
+```diff
+- contentType: "application/x-www-form-urlencoded",
++ contentType: "application/json;charset=UTF-8",
+```
+
+7574行
+```diff
+- var inspectData = s.contentType === "application/x-www-form-urlencoded" &&
++ var inspectData = s.contentType === "application/json;charset=UTF-8" &&
+```
+
 
 ## 启动
 

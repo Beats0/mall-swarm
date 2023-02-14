@@ -19,7 +19,7 @@ scrape_configs:
   - job_name: 'node'
     # dashboards 1860
     static_configs:
-      - targets: ['172.17.0.1:9100']
+      - targets: ['172.17.0.1:9101']
 
   - job_name: 'mysql'
     # dashboards 7362

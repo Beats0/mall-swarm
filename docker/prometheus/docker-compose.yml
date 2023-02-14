@@ -34,7 +34,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
-      - GF_USERS_ALLOW_SIGN_UP=false  
+      - GF_USERS_ALLOW_SIGN_UP=false
       - TZ=Asia/Shanghai
     ports:
       - "3001:3000"
@@ -57,7 +57,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
     ports:
-      - "9100:9100"
+      - "9101:9100"
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro

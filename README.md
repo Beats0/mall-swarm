@@ -65,52 +65,54 @@ cd _site/
 + var inspectData = s.contentType === "application/json;charset=UTF-8" &&
 ```
 
-## 启动
-
-mall-swarm项目启动有先后顺序，大家可以按照以下顺序启动。
-```
-启动网关服务mall-gateway，直接运行MallGatewayApplication的main函数即可；
-
-启动认证中心mall-auth，直接运行MallAuthApplication的main函数即可；
-
-启动后台管理服务mall-admin，直接运行MallAdminApplication的main函数即可；
-
-启动前台服务mall-portal，直接运行MallPortalApplication的main函数即可；
-
-启动搜索服务mall-search，直接运行MallSearchApplication的main函数即可；
-
-启动监控中心mall-monitor，直接运行MallMonitorApplication的main函数即可；
-
-运行完成后可以通过监控中心查看监控信息，账号密码为 macro:123456：http://localhost:8101
-
-运行完成后可以直接通过如下地址访问API文档：http://localhost:8201/doc.html
-```
 
 ## 服务列表
 
 配置见对应的docker-compose.yml
 
-| 名称            | 地址                           | 账号密码                  | 备注                                                              |
-|---------------|------------------------------|-----------------------|-----------------------------------------------------------------|
-| 前端vue         | http://localhost:81          | admin:macro123        | 项目地址 [mall-admin-web](https://github.com/Beats0/mall-admin-web) |
-| mysql         | 3306                         | root:mysqlroot        |                                                                 |
-| redis         | 6379                         | redisroot@redisroot   |                                                                 |
-| mongodb       | 27017                        | admin:admin                |                                                                 |
-| elasticsearch | http://localhost:9200        |                       |                                                                 |
-| logstash        | 4560        |                       |                                                                 |
-| kibana        | http://localhost:4560        |                       |                                                                 |
-| es-head       | http://localhost:9100        |                       |                                                                 |
-| nacos         | http://localhost:8848/nacos/ | nacos:nacos           |                                                                 |
-| minio         | http://localhost:9001        | minioadmin:minioadmin |                                                                 |
-| rabbitmq      | http://localhost:15672       | guest:guest           |                                                                 |
-| SpringBootAdmin      | http://localhost:8101       | macro:123456           |                                                                 |
-| nginx         | 80/443                       |               |                                                                 |
-| prometheus      | http://localhost:9090        |        |                                                                 |
-| grafana      | http://localhost:3001        | admin:password           |                                                                 |
-| cadvisor      | http://localhost:8090        |        |                                                                 |
-| node-exporter      | http://localhost:9101        |        |                                                                 |
-| mysqld-exporter      | http://localhost:9104        |        |                                                                 |
-| mogno-exporter      | http://localhost:9216        |        |                                                                 |
+服务:
+
+按顺序启动
+
+| 名称           | 地址                             | 账号密码         | 备注                                                              |
+|--------------|-----------------------------------|------------------|-------------------------------------------------------------------|
+| 前端vue      | http://localhost:81               | admin:macro123   | 项目地址 [mall-admin-web](https://github.com/Beats0/mall-admin-web)|
+| mall-gateway | http://localhost:8201             |                  | 网关服务                                                           |
+| mall-auth    | http://localhost:8401             |                  | 认证中心                                                           |
+| mall-admin   | http://localhost:8080             |                  | 后台管理服务                                                       |
+| mall-portal  | http://localhost:8085             |                  | 前台服务                                                           |
+| mall-search  | http://localhost:8081             |                  | 搜索服务                                                           |
+| mall-monitor | http://localhost:8101             | macro:123456     | 监控中心                                                           |
+| knife4j文档  | http://localhost:8201/doc.html    |                   | knife4j文档                                                       |
+
+环境:
+
+| 名称          | 地址                          | 账号密码                     | 备注                                                                                 |
+|---------------|------------------------------|-----------------------------|--------------------------------------------------------------------------------------|
+| mysql         | 3306                         | root:mysqlroot              |                                                                                      |
+| redis         | 6379                         | redisroot@redisroot         |                                                                                      |
+| mongodb       | 27017                        | admin:admin                 |                                                                                      |
+| elasticsearch | http://localhost:9200        |                             | [测试elasticsearch](https://www.macrozheng.com/mall/architect/mall_arch_07.html)     |
+| logstash      | 4560                         |                             |                                                                                      |
+| kibana        | http://localhost:5601        |                             |                                                                                      |
+| es-head       | http://localhost:9100        |                             |                                                                                      |
+| nacos         | http://localhost:8848/nacos/ | nacos:nacos                 |                                                                                      |
+| minio         | http://localhost:9001        | minioadmin:minioadmin       | 设置 Bucket 为 mall, 并将 Access Policy 设置为 Public                                  |
+| rabbitmq      | http://localhost:15672       | guest:guest                 |                                                                                      |
+| nginx         | 80/443                       |                             |                                                                                      |
+
+
+监控:
+
+| 名称                | 地址                           | 账号密码                  | 备注                                                            |
+|---------------------|------------------------------|---------------------------|-----------------------------------------------------------------|
+| SpringBootAdmin     | http://localhost:8101        | macro:123456              |                                                                 |
+| prometheus          | http://localhost:9090        |                           |                                                                 |
+| grafana             | http://localhost:3001        | admin:password            |                                                                 |
+| cadvisor            | http://localhost:8090        |                           |                                                                 |
+| node-exporter       | http://localhost:9101        |                           |                                                                 |
+| mysqld-exporter     | http://localhost:9104        |                           |                                                                 |
+| mogno-exporter      | http://localhost:9216        |                           |                                                                 |
 
 ## 项目介绍
 
